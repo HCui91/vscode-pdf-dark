@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="12 10 232 232">
+  <!-- Dark page with a folded corner. -->
+  <path d="M60 18 H170 L218 66 V222 a16 16 0 0 1 -16 16 H60 a16 16 0 0 1 -16 -16 V34 a16 16 0 0 1 16 -16 Z"
+        fill="#1e2228" stroke="#4a515c" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M170 18 V52 a14 14 0 0 0 14 14 H218 Z"
+        fill="#3b424d" stroke="#4a515c" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Plot axes. -->
+  <path d="M70 70 V172 H196" fill="none" stroke="#8b929c" stroke-width="7"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Plot lines that keep their colours. -->
+  <g fill="none" stroke-width="9" stroke-linecap="round">
+    <path d="M84 152 C104 152 110 96 132 96 S168 140 190 84" stroke="#ff6b6b"/>
+    <path d="M84 118 C104 118 114 154 136 154 S172 112 190 124" stroke="#4dabf7"/>
+    <path d="M84 92 C102 92 118 128 140 124 S174 92 190 100" stroke="#ffd43b"/>
+  </g>
+  <!-- PDF tag. -->
+  <rect x="24" y="186" width="104" height="48" rx="11" fill="#e5484d"/>
+  <text x="76" y="220" text-anchor="middle" fill="#ffffff"
+        font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-weight="700" font-size="31"
+        letter-spacing="1">PDF</text>
+</svg>

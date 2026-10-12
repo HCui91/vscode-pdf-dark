@@ -2,7 +2,7 @@
   "name": "pdf-preview-dark",
   "displayName": "PDF Preview Dark",
   "description": "Preview PDF files in dark colour schemes that keep plot colours readable. Works over Remote-SSH.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "HCui91",
   "license": "MIT",
   "repository": {
@@ -27,6 +27,7 @@
     "plot",
     "remote"
   ],
+  "icon": "images/icon.png",
   "main": "./dist/extension.js",
   "extensionKind": [
     "ui",

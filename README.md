@@ -2,7 +2,7 @@
 
 Dark PDF preview for VS Code that keeps plot colours. Made for reading plots on a remote machine over Remote-SSH.
 
-![Line plot in dark mode. Each line keeps its colour.](test/screenshots/line.png)
+![Line plot in dark mode. Each line keeps its colour.](images/line.png)
 
 ## Ready to use
 
@@ -14,7 +14,7 @@ Install it and open a `.pdf`. There is nothing to set up.
 - Files on `/afs` and `/eos` are also checked every 2 s, since file watching misses writes from batch jobs.
 - Install it once on your own machine. It then works on every SSH host.
 
-![Limit plot. The yellow and green bands stay distinct.](test/screenshots/band.png)
+![Limit plot. The yellow and green bands stay distinct.](images/band.png)
 
 ## Colours
 
@@ -24,7 +24,7 @@ To change the look, use the drop-down in the toolbar or the `pdfPreviewDark.colo
 
 Bright colours such as yellow stay visible on a dark page. Images inside the PDF change too, and so does their colour bar, so the values still read right.
 
-![ROOT colours and an image with its colour bar.](test/screenshots/root.png)
+![ROOT colours and an image with its colour bar.](images/root.png)
 
 ## Keys
 
