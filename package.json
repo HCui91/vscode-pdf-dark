@@ -1,0 +1,202 @@
+{
+  "name": "pdf-preview-dark",
+  "displayName": "PDF Preview Dark",
+  "description": "Preview PDF files in dark colour schemes that keep plot colours readable. Works over Remote-SSH.",
+  "version": "0.1.0",
+  "publisher": "HCui91",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HCui91/vscode-pdf-dark.git"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "pdf",
+    "dark",
+    "viewer",
+    "plot",
+    "remote"
+  ],
+  "main": "./dist/extension.js",
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "pdfPreviewDark.preview",
+        "displayName": "PDF Preview (Dark)",
+        "selector": [
+          {
+            "filenamePattern": "*.pdf"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "pdfPreviewDark.selectScheme",
+        "title": "Select Colour Scheme…",
+        "category": "PDF Preview Dark",
+        "icon": "$(symbol-color)"
+      },
+      {
+        "command": "pdfPreviewDark.toggleDark",
+        "title": "Toggle Dark Colours",
+        "category": "PDF Preview Dark",
+        "icon": "$(color-mode)"
+      },
+      {
+        "command": "pdfPreviewDark.reload",
+        "title": "Reload PDF",
+        "category": "PDF Preview Dark",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "pdfPreviewDark.toggleDark",
+          "group": "navigation",
+          "when": "activeCustomEditorId == 'pdfPreviewDark.preview'"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "pdfPreviewDark.reload",
+          "when": "activeCustomEditorId == 'pdfPreviewDark.preview'"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "pdfPreviewDark.toggleDark",
+        "key": "alt+i",
+        "when": "activeCustomEditorId == 'pdfPreviewDark.preview'"
+      }
+    ],
+    "configuration": {
+      "title": "PDF Preview Dark",
+      "properties": {
+        "pdfPreviewDark.colorScheme": {
+          "type": "string",
+          "default": "vscodeTheme",
+          "enum": [
+            "vscodeTheme",
+            "oled",
+            "oneDark",
+            "solarizedDark",
+            "sepia",
+            "custom",
+            "off"
+          ],
+          "enumDescriptions": [
+            "Follow the editor background and foreground of the current VS Code theme.",
+            "Pure black page, white ink.",
+            "One Dark colours (#282c34 / #abb2bf), softer contrast.",
+            "Solarized Dark colours (#002b36 / #839496).",
+            "Warm light page (#f4ecd8 / #5b4636), less glare than white.",
+            "Use `#pdfPreviewDark.customColors.background#` and `#pdfPreviewDark.customColors.foreground#`.",
+            "Show the original colours."
+          ],
+          "markdownDescription": "Colour scheme for PDF pages. White on the page becomes the scheme background, black becomes the scheme foreground."
+        },
+        "pdfPreviewDark.customColors.background": {
+          "type": "string",
+          "default": "#1e1e1e",
+          "format": "color-hex",
+          "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$",
+          "markdownDescription": "Page background for the `custom` scheme (what white becomes)."
+        },
+        "pdfPreviewDark.customColors.foreground": {
+          "type": "string",
+          "default": "#d4d4d4",
+          "format": "color-hex",
+          "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$",
+          "markdownDescription": "Ink colour for the `custom` scheme (what black becomes)."
+        },
+        "pdfPreviewDark.hueMode": {
+          "type": "string",
+          "default": "balanced",
+          "enum": [
+            "balanced",
+            "css",
+            "off"
+          ],
+          "enumDescriptions": [
+            "Keep hues. Tuned so bright colours such as yellow stay visible on dark pages.",
+            "Keep hues the way CSS invert(1) hue-rotate(180deg) does. Yellow turns very dark.",
+            "Plain inversion. Hues flip (red becomes cyan)."
+          ],
+          "markdownDescription": "How colours are mapped when the page is inverted. Has no effect on light schemes."
+        },
+        "pdfPreviewDark.defaultZoom": {
+          "type": "string",
+          "default": "auto",
+          "pattern": "^(auto|page-width|page-fit|page-actual|[1-9][0-9]{1,3})$",
+          "markdownDescription": "Zoom for a newly opened PDF: `auto`, `page-width`, `page-fit`, `page-actual`, or a percentage such as `150`."
+        },
+        "pdfPreviewDark.reload.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Reload the preview when the PDF changes on disk."
+        },
+        "pdfPreviewDark.reload.poll": {
+          "type": "string",
+          "default": "auto",
+          "enum": [
+            "auto",
+            "always",
+            "never"
+          ],
+          "enumDescriptions": [
+            "Poll only for files under /afs/ or /eos/, where file watching misses writes from other machines.",
+            "Always poll as well as watch.",
+            "Only rely on the file watcher."
+          ],
+          "markdownDescription": "Check the file for changes on a timer while the preview is visible."
+        },
+        "pdfPreviewDark.reload.pollInterval": {
+          "type": "number",
+          "default": 2,
+          "minimum": 0.5,
+          "markdownDescription": "Seconds between polls, see `#pdfPreviewDark.reload.poll#`."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit -p . && tsc --noEmit -p src/webview",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test test/*.test.ts",
+    "vscode:prepublish": "node esbuild.mjs --production",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/vscode": "1.95.0",
+    "@vscode/vsce": "4.0.0",
+    "esbuild": "0.28.2",
+    "pdfjs-dist": "6.4.299",
+    "typescript": "5.9.3"
+  }
+}
