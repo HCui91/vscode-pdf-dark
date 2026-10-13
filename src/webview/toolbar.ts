@@ -35,9 +35,7 @@ export class Toolbar {
         viewer.setZoom(this.zoomSelect.value);
       }
     });
-    eventBus.on('scalechanging', ({ scale, presetValue }: { scale: number; presetValue?: string }) => {
-      this.showScale(scale, presetValue);
-    });
+    viewer.onZoomChange = (mode, scale) => this.showZoom(mode, scale);
 
     for (const s of SCHEMES) {
       this.schemeSelect.append(new Option(s.label, s.id));
@@ -54,12 +52,13 @@ export class Toolbar {
     this.status.title = text;
   }
 
-  private showScale(scale: number, presetValue: string | undefined): void {
-    const value = presetValue ?? String(scale);
-    const match = [...this.zoomSelect.options].find((o) => o.value === value && o !== this.customScale);
+  private showZoom(mode: string, scale: number): void {
+    const match = [...this.zoomSelect.options].find(
+      (o) => o !== this.customScale && (o.value === mode || Number(o.value) === Number(mode)),
+    );
     if (match) {
       this.customScale.hidden = true;
-      this.zoomSelect.value = value;
+      this.zoomSelect.value = match.value;
     } else {
       this.customScale.textContent = `${Math.round(scale * 100)}%`;
       this.customScale.hidden = false;

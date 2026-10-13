@@ -2,8 +2,6 @@
 
 :root {
   --toolbar-height: 32px;
-  --page-margin: 8px auto;
-  --page-border: 0;
 }
 
 body {
@@ -113,6 +111,11 @@ body {
 .pdfViewer .page {
   /* Keeps the page edge visible when the page colour matches the editor. */
   outline: 1px solid var(--vscode-editorWidget-border, rgb(127 127 127 / 0.35));
+}
+
+/* No gap after the last page, so a page that fits needs no scrollbar. */
+.pdfViewer.removePageBorders .page:last-child {
+  margin-bottom: 0;
 }
 
 /* Recolouring, see theme.ts. */

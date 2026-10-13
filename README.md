@@ -9,6 +9,7 @@ Dark PDF preview for VS Code that keeps plot colours. Made for reading plots on 
 Install it and open a `.pdf`. There is nothing to set up.
 
 - The page follows your VS Code theme, and changes when you switch themes.
+- The page fits the pane, and refits when you resize it.
 - Lines keep their hue. Red stays red and blue stays blue.
 - The preview reloads when the file changes, and stays on the same page and zoom. It waits until the file is fully written, so you never see half a plot.
 - Files on `/afs` and `/eos` are also checked every 2 s, since file watching misses writes from batch jobs.
@@ -44,7 +45,7 @@ Bright colours such as yellow stay visible on a dark page. Images inside the PDF
 | `pdfPreviewDark.customColors.background` | `#1e1e1e` | Page colour for `custom` |
 | `pdfPreviewDark.customColors.foreground` | `#d4d4d4` | Ink colour for `custom` |
 | `pdfPreviewDark.hueMode` | `balanced` | `css` copies CSS invert and hue-rotate. `off` is a plain invert |
-| `pdfPreviewDark.defaultZoom` | `auto` | `page-width`, `page-fit`, `page-actual`, or a percent such as `150` |
+| `pdfPreviewDark.defaultZoom` | `auto` | `auto` shows the whole page for landscape plots and the full width for portrait pages. Also `page-width`, `page-fit`, `page-actual`, or a percent such as `150` |
 | `pdfPreviewDark.reload.enabled` | `true` | Reload when the file changes |
 | `pdfPreviewDark.reload.poll` | `auto` | `always` or `never` to override the `/afs` and `/eos` check |
 | `pdfPreviewDark.reload.pollInterval` | `2` | Seconds between checks |
